@@ -1,6 +1,7 @@
 
 module.exports = {
   mode: 'jit',
+  content: ['node_modules/daisyui/dist/**/*.js', 'node_modules/react-daisyui/dist/**/*.js', 'src/**/*.{ts,tsx}'],
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     safeList: [],

@@ -1,7 +1,7 @@
-import {createContext, ReactNode, useContext, useReducer} from "react";
-import { User } from "firebase/auth";
+import { createContext, ReactNode, useContext, useReducer } from "react";
+type User = { email: string, token: string }
 
-type AuthActions = { type: 'SIGN_IN', payload: { user: User } } | {type: 'SIGN_OUT'}
+type AuthActions = { type: 'SIGN_IN', payload: { user: User } } | { type: 'SIGN_OUT' }
 
 type AuthState = {
   state: 'SIGNED_IN'
@@ -32,8 +32,10 @@ type AuthContextProps = {
   dispatch: (value: AuthActions) => void
 }
 
-export const AuthContext = createContext<AuthContextProps>({ state: { state: 'UNKNOWN' }, dispatch: (val) => {
-  } });
+export const AuthContext = createContext<AuthContextProps>({
+  state: { state: 'UNKNOWN' }, dispatch: (val) => {
+  }
+});
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(AuthReducer, { state: 'UNKNOWN' })
@@ -53,19 +55,19 @@ const useAuthState = () => {
 };
 
 const useSignIn = () => {
-  const {dispatch} = useContext(AuthContext)
+  const { dispatch } = useContext(AuthContext)
   return {
     signIn: (user: User) => {
-      dispatch({type: "SIGN_IN", payload: {user}})
+      dispatch({ type: "SIGN_IN", payload: { user } })
     }
   }
 }
 
 const useSignOut = () => {
-  const {dispatch} = useContext(AuthContext)
+  const { dispatch } = useContext(AuthContext)
   return {
     signOut: () => {
-      dispatch({type: "SIGN_OUT"})
+      dispatch({ type: "SIGN_OUT" })
     }
   }
 }

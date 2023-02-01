@@ -1,6 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { lazy, Suspense, useState } from 'react';
 import { Outlet, RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
+import { BottomNavigation, Button, Navbar } from 'react-daisyui'
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
@@ -9,11 +10,11 @@ const Page404Screen = lazy(() => import('~/components/screens/404'));
 
 function Layout() {
   return (
-    <div>
-      <nav className="p-4 flex items-center justify-between">
-        <span>Header</span>
-      </nav>
+    <div className="max-h-screen">
       <Outlet />
+      <BottomNavigation className='flex bg-base-200 w-full'>
+        <Button className='flex-auto mx-4' >Home</Button>
+      </BottomNavigation>
     </div>
   );
 }
